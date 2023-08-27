@@ -11,10 +11,14 @@
 <body class="bg-gray-100">
 <nav class="bg-blue-500 p-4 fixed w-full top-0 z-50">
     <div class="container mx-auto flex items-center justify-between">
-        <div class="text-white font-semibold text-xl">My Website</div>
+        <div class="text-white font-semibold text-xl">Hospital Site</div>
         <div class="hidden lg:flex space-x-4">
             <a href="/home" class="text-white hover:text-gray-200">Home</a>
             <a href="/contact" class="text-white hover:text-gray-200">Contact</a>
+        </div>
+        <div class="hidden lg:flex space-x-4">
+            <a href="/login" class="text-white hover:text-gray-200">Login</a>
+            <a href="/register" class="text-white hover:text-gray-200">Register</a>
         </div>
     </div>
 </nav>
