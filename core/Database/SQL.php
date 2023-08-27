@@ -6,7 +6,7 @@ use PDO;
 
 class SQL implements DatabaseInterface
 {
-    private array $data;
+    private array $data=[];
     private string $query;
     private PDO $pdo;
     private string $table;
@@ -19,6 +19,7 @@ class SQL implements DatabaseInterface
         $this->pdo = new PDO($dsn, 'root');
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $this->createDatabase();
+        $this->pdo->query("use ".$this->db)->execute();
         $this->createTables();
     }
 
@@ -63,6 +64,9 @@ class SQL implements DatabaseInterface
 
     public function exec(): bool
     {
+//        echo "<pre>";
+//        print_r($this->data);
+//        echo "<pre>";
         return $this->pdo->prepare($this->query . ";")->execute($this->data);
     }
 
@@ -103,7 +107,6 @@ class SQL implements DatabaseInterface
                             )";
             $this->exec();
         }
-
         if (!$this->pdo->query("show tables like 'managers' ;")->fetchAll()) {
             $this->query = "create table managers
                             (
@@ -118,13 +121,13 @@ class SQL implements DatabaseInterface
             $this->query = "create table patients
                             (
                                 id int primary key auto_increment,
-                                name varchar(50),
+                                name varchar(50)
                             )";
             $this->exec();
         }
 
         if (!$this->pdo->query("show tables like 'visit_times' ;")->fetchAll()) {
-            $this->query = "create table managers
+            $this->query = "create table visit_times
                             (
                                 id int primary key auto_increment,
                                 day varchar(20),

@@ -12,12 +12,12 @@ class DoctorsManager
 
     private function __construct(?DatabaseInterface $db = null)
     {
-        $this->db = (!$db) ?: SQL::getInstance();
+        $this->db = ($db) ?: SQL::getInstance();
     }
 
     public static function getInstance(?DatabaseInterface $db = null): self
     {
-        if (self::$instance) self::$instance->setDatabaseManager((!$db) ?: SQL::getInstance());
+        if (self::$instance) self::$instance->setDatabaseManager(($db) ?: SQL::getInstance());
         else self::$instance = new self($db);
         return self::$instance;
     }

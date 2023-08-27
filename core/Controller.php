@@ -13,9 +13,4 @@ abstract class Controller
     {
         $this->layout = $layout;
     }
-
-    public function render(string $view,array $params =[])
-    {
-        Render::renderURI($view,$this->layout,$params);
-    }
 }

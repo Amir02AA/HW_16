@@ -23,7 +23,7 @@
                 <option value="doctor">Doctor</option>
             </select>
         </div>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none" name="submit">
             Register
         </button>
         <a href="/home" class="mt-4 flex items-center text-gray-600 hover:text-gray-800">
