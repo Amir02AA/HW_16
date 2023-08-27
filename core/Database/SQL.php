@@ -56,7 +56,7 @@ class SQL implements DatabaseInterface
 
     public function where(string $column, string $val, string $operator = '=')
     {
-        $this->data[] = [$column => $val];
+        $this->data[$column] = $val;
 
         $this->query .= " Where $column $operator :$column ";
         return $this;
@@ -72,6 +72,9 @@ class SQL implements DatabaseInterface
 
     public function fetchAll(): array|string
     {
+//        echo "<pre>";
+//        print_r($this->data);
+//        echo "<pre>";
         $stmnt = $this->pdo->prepare($this->query . ";");
         $stmnt->execute($this->data);
 
@@ -103,7 +106,10 @@ class SQL implements DatabaseInterface
                                 id int primary key auto_increment,
                                 name varchar(50),
                                 section varchar(50),
-                                verified tinyint
+                                verified tinyint,
+                                username varchar(50) unique ,
+                                password varchar(20),
+                                email varchar(50)
                             )";
             $this->exec();
         }
@@ -112,7 +118,10 @@ class SQL implements DatabaseInterface
                             (
                                 id int primary key auto_increment,
                                 name varchar(50),
-                                verified tinyint
+                                verified tinyint,
+                                username varchar(50) unique ,
+                                password varchar(20),
+                                email varchar(50)
                             )";
             $this->exec();
         }
@@ -121,7 +130,10 @@ class SQL implements DatabaseInterface
             $this->query = "create table patients
                             (
                                 id int primary key auto_increment,
-                                name varchar(50)
+                                name varchar(50),
+                                username varchar(50) unique ,
+                                password varchar(20),
+                                email varchar(50)
                             )";
             $this->exec();
         }

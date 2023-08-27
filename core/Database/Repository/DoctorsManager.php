@@ -36,6 +36,10 @@ class DoctorsManager
     {
         return $this->db->table('doctors')->select()->where('id', $id)->fetchAll();
     }
+    public function getDoctorByUserName(string $username)
+    {
+        return $this->db->table('doctors')->select()->where('username', $username)->fetchAll();
+    }
 
     public function addDoctor(array $doctor)
     {

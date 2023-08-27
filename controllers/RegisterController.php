@@ -6,6 +6,7 @@ use core\Controller;
 use core\Database\Repository\DoctorsManager;
 use core\Database\SQL;
 use core\Render;
+use core\Request;
 
 class RegisterController extends Controller
 {
@@ -17,9 +18,11 @@ class RegisterController extends Controller
 
     public static function addAccount()
     {
+        $_POST = Request::getInstance()->getSanitizedData();
         $user = [
-            'name' => $_POST["username"],
-            'section' => 'nurology',
+            'username' => $_POST["username"],
+            'password' => $_POST["password"],
+            'email' => $_POST["email"],
             'verified' => 0
         ];
         if ($_POST["role"] == 'doctor') DoctorsManager::getInstance()->addDoctor($user);
