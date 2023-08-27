@@ -10,5 +10,5 @@ interface DatabaseInterface
     public function delete();
     public function where(string $column, string $val, string $operator = '=');
 
-    public function update();
+    public function update(array $values);
 }

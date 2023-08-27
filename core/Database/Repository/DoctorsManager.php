@@ -34,7 +34,7 @@ class DoctorsManager
 
     public function getDoctorById(int $id)
     {
-        return $this->db->table('doctors')->select()->where('id',$id)->fetchAll();
+        return $this->db->table('doctors')->select()->where('id', $id)->fetchAll();
     }
 
     public function addDoctor(array $doctor)
@@ -44,7 +44,7 @@ class DoctorsManager
 
     public function verifyDoctor(int $id)
     {
-
+        $this->db->table('doctors')->update(['verify' => 1])->where('id', $id)->exec();
     }
 
 }

@@ -16,7 +16,7 @@ class SQL implements DatabaseInterface
     private function __construct()
     {
         $dsn = "mysql:host=localhost;";
-        $this->pdo = new PDO($dsn,'root');
+        $this->pdo = new PDO($dsn, 'root');
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $this->createDatabase();
         $this->createTables();
@@ -93,7 +93,7 @@ class SQL implements DatabaseInterface
 
     public function createTables()
     {
-        if (!$this->pdo->query("show tables like 'doctors' ;")->fetchAll()){
+        if (!$this->pdo->query("show tables like 'doctors' ;")->fetchAll()) {
             $this->query = "create table doctors
                             (
                                 id int primary key auto_increment,
@@ -104,7 +104,7 @@ class SQL implements DatabaseInterface
             $this->exec();
         }
 
-        if (!$this->pdo->query("show tables like 'managers' ;")->fetchAll()){
+        if (!$this->pdo->query("show tables like 'managers' ;")->fetchAll()) {
             $this->query = "create table managers
                             (
                                 id int primary key auto_increment,
@@ -114,7 +114,7 @@ class SQL implements DatabaseInterface
             $this->exec();
         }
 
-        if (!$this->pdo->query("show tables like 'patients' ;")->fetchAll()){
+        if (!$this->pdo->query("show tables like 'patients' ;")->fetchAll()) {
             $this->query = "create table patients
                             (
                                 id int primary key auto_increment,
@@ -123,7 +123,7 @@ class SQL implements DatabaseInterface
             $this->exec();
         }
 
-        if (!$this->pdo->query("show tables like 'visit_times' ;")->fetchAll()){
+        if (!$this->pdo->query("show tables like 'visit_times' ;")->fetchAll()) {
             $this->query = "create table managers
                             (
                                 id int primary key auto_increment,
@@ -138,11 +138,16 @@ class SQL implements DatabaseInterface
         }
 
 
-
     }
 
-    public function update()
+    public function update(array $values)
     {
+        $this->query = 'update ' . $this->table . " set ";
+        foreach ($values as $column => $value) {
+            $this->query .= $column . "=" . ":$column ,";
+        }
 
+        $this->query = substr($this->query, 0, strlen($this->query) - 2);
+        return $this;
     }
 }
