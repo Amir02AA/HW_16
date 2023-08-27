@@ -1,0 +1,11 @@
+{
+    "name": "asus/cinic_mvc",
+    "autoload": {
+        "psr-4": {
+            "": ""
+        }
+    },
+    "require": {
+      "ext-pdo": "*"
+    }
+}
