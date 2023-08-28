@@ -2,11 +2,22 @@
 
 namespace core\Database\Repository;
 
+use core\Database\DatabaseInterface;
+use core\Database\SQL;
+
 class ManagersManager extends Manager
 {
+    protected static ?self $instance = null;
+
+    public static function getInstance(?DatabaseInterface $db = null): self
+    {
+        if (static::$instance) static::$instance->setDatabaseManager(($db) ?: SQL::getInstance());
+        else static::$instance = new static($db);
+        return static::$instance;
+    }
     public function getManagers()
     {
-        return $this->db->table('managers')->select()->exec();
+        return $this->db->table('managers')->select()->fetchAll();
     }
 
     public function getManagerByUserName(string $username)
@@ -25,5 +36,10 @@ class ManagersManager extends Manager
     public function verifyManager(int $id)
     {
         $this->db->table('managers')->update(['verified' => 1])->where('id', $id)->exec();
+    }
+
+    public function getUnverifiedManagers()
+    {
+        return $this->db->table('managers')->select()->where('verified',0)->fetchAll();
     }
 }

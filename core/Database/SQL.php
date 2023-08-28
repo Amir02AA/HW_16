@@ -152,6 +152,15 @@ class SQL implements DatabaseInterface
             $this->exec();
         }
 
+        if (!$this->pdo->query("show tables like 'sections' ;")->fetchAll()) {
+            $this->query = "create table sections
+                            (
+                                id int primary key ,
+                                name varchar(50)
+                            )";
+            $this->exec();
+        }
+
 
     }
 

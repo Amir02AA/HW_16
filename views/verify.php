@@ -1,4 +1,8 @@
 <?php
+//echo "<pre>";
+////print_r($users);
+////echo "<pre>";
+$users ??= [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,27 +25,29 @@
     <div class="flex space-x-4">
         <div class="w-1/2">
             <h2 class="text-lg font-semibold mb-2">Doctors</h2>
-            <button type="button" class="bg-purple-600 text-gray-200 px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none w-full mb-2">
-                Button 1
+            <?php
+            foreach (@$users['doctors'] as $index => $doctor) {
+                $color = ($doctor['verified'])? "text-gray-200" : "text-red-800";
+            ?>
+            <button type="button"
+                    class="bg-purple-400 <?= $color ?> px-4 py-2 font-bold rounded hover:bg-indigo-700 focus:outline-none w-full mb-2">
+                <?= $doctor['username'] ?>
             </button>
-            <button type="button" class="bg-purple-600 text-gray-200 px-4 py-2 rounded hover:bg-purple-700 focus:outline-none w-full mb-2">
-                Button 2
-            </button>
+           <?php } ?>
         </div>
         <div class="w-1/2">
             <h2 class="text-lg font-semibold mb-2">Managers</h2>
-            <button type="button" class="bg-green-600 text-gray-200 px-4 py-2 rounded hover:bg-blue-700 focus:outline-none w-full mb-2">
-                Button 3
+            <?php
+            foreach (@$users['managers'] as $index => $manager) {
+            $color = ($manager['verified'])? "text-gray-200" : "text-red-800";
+            ?>
+            <button type="button"
+                    class="bg-green-600 <?= $color ?> px-4 py-2 font-bold rounded hover:bg-blue-700 focus:outline-none w-full mb-2">
+                <?= $manager['username'] ?>
             </button>
-            <button type="button" class="bg-green-600 text-gray-200 px-4 py-2 rounded hover:bg-green-700 focus:outline-none w-full mb-2">
-                Button 4
-            </button>
+            <?php } ?>
         </div>
     </div>
-
-    <a href="/sections" class="bg-gray-600 text-gray-200 px-4 py-2 rounded hover:bg-gray-700 focus:outline-none mt-4">
-        Sections
-    </a>
 </div>
 </body>
 </html>

@@ -6,15 +6,21 @@ abstract class Render
 {
     public static function renderURI(string $uri, string $layout = 'main', array $params = [])
     {
+        foreach ($params as $index => $param) {
+            $$index = $param;
+        }
         ob_start();
         include_once "../views/layouts/$layout.php";
         $layout = ob_get_clean();
-        $view = self::renderView($uri);
+        $view = self::renderView($uri,$params);
         return str_replace('{{c}}', $view, $layout);
     }
 
-    public static function renderView(string $uri)
+    public static function renderView(string $uri , array $params = [])
     {
+        foreach ($params as $index => $param) {
+            $$index = $param;
+        }
         ob_start();
         include_once "../views/$uri.php";
         return ob_get_clean();
