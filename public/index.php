@@ -9,6 +9,7 @@ $app->router->get('/contact',[\controllers\ContactController::class,'contact']);
 $app->router->get('/login',[\controllers\LoginController::class,'loginPage']);
 $app->router->get('/register',[\controllers\RegisterController::class,'register']);
 $app->router->get('/logout',[\controllers\LogoutController::class,'logout']);
+$app->router->get('/profile',[\controllers\ProfileController::class,'profile']);
 
 $app->router->post('/',[\controllers\HomeController::class,'home']);
 $app->router->post('/home',[\controllers\HomeController::class,'home']);
@@ -16,6 +17,7 @@ $app->router->post('/contact',[\controllers\ContactController::class,'contact'])
 $app->router->post('/login',[\controllers\LoginController::class,'loginPage']);
 $app->router->post('/register',[\controllers\RegisterController::class,'register']);
 $app->router->post('/logout',[\controllers\LogoutController::class,'logout']);
+$app->router->post('/profile',[\controllers\ProfileController::class,'profile']);
 
 
 $app->run();
