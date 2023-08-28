@@ -48,9 +48,17 @@
         <textarea id="history" name="history" rows="4" class="mt-1 px-4 py-2 w-full border rounded-md bg-gray-700 text-gray-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</textarea>
     </div>
 
-    <button type="submit" class="bg-indigo-600 text-gray-200 px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none">
-        Save Changes
-    </button>
+    <div class="flex space-x-4">
+        <button type="submit" class="bg-indigo-600 text-gray-200 px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none">
+            Save Changes
+        </button>
+        <a href="/verify" class="bg-indigo-600 text-gray-200 px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none">
+            Verify
+        </a>
+        <a href="/sections" class="bg-indigo-600 text-gray-200 px-4 py-2 rounded hover:bg-purple-700 focus:outline-none">
+            Sections
+        </a>
+    </div>
 </div>
 </body>
 </html>
