@@ -2,7 +2,7 @@
 
 namespace core\Database\Repository;
 
-class PatientManager
+class PatientManager extends Manager
 {
 
 }

@@ -2,7 +2,7 @@
 ?>
 <div class="flex h-screen">
     <div class="flex-1 p-8">
-        <h1 class="text-3xl font-semibold mb-4">Welcome to Our Website <?= $_SESSION['user'] ?></h1>
+        <h1 class="text-3xl font-semibold mb-4">Welcome to Our Website <?= @$_SESSION['user'] ?></h1>
         <p class="text-gray-600">This is a homepage with a side menu on the right.</p>
     </div>
     <nav class="bg-blue-500 text-white w-64 p-4">
