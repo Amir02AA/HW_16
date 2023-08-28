@@ -18,7 +18,7 @@ class DoctorsManager extends Manager
     }
     public function getDoctorByUserName(string $username)
     {
-        return $this->db->table('doctors')->select()->where('username', $username)->fetchAll();
+        return $this->db->table('doctors')->select()->where('username', $username)->fetchAll()[0];
     }
 
     public function addDoctor(array $doctor)

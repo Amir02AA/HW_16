@@ -11,7 +11,7 @@ class ManagersManager extends Manager
 
     public function getManagerByUserName(string $username)
     {
-        return $this->db->table('managers')->select()->where('username', $username)->fetchAll();
+        return $this->db->table('managers')->select()->where('username', $username)->fetchAll()[0];
     }
 
     public function addManager(array $manager)

@@ -14,36 +14,44 @@ class LoginController extends Controller
     public static function loginPage()
     {
         $_POST = Request::getInstance()->getSanitizedData();
+
         if (isset($_POST["submit"])) call_user_func([self::class, $_POST["role"] . "Login"]);
         return Render::renderURI('login', 'auth');
     }
 
     public static function doctorLogin()
     {
-        $password = DoctorsManager::getInstance()->getDoctorByUserName($_POST["username"])['password'];
-        if ($password = $_POST["password"]) {
+
+        $password = DoctorsManager::getInstance()->getDoctorByUserName($_POST["username"])['password'] ?? '';
+        $verified = DoctorsManager::getInstance()->getDoctorByUserName($_POST["username"])['verified'];
+        if ($password == $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];
+            $_SESSION['verified'] = $verified;
             header("location:/home");
         }
     }
 
     public static function managerLogin()
     {
-        $password = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['password'];
-        if ($password = $_POST["password"]) {
+        $password = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['password'] ?? '';
+        $verified = DoctorsManager::getInstance()->getManagerByUserName($_POST["username"])['verified'];
+
+        if ($password == $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];
+            $_SESSION['verified'] = $verified;
             header("location:/home");
         }
     }
 
     public static function patientLogin()
     {
-        $password = PatientManager::getInstance()->getPatientByUserName($_POST["username"])['password'];
-        if ($password = $_POST["password"]) {
+        $password = PatientManager::getInstance()->getPatientByUserName($_POST["username"])['password'] ?? '';
+        if ($password == $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];
+            $_SESSION['verified'] = 1;
             header("location:/home");
         }
     }
