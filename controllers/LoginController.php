@@ -30,7 +30,7 @@ class LoginController extends Controller
 
     public static function managerLogin()
     {
-        $password = ManagersManager::getInstance()->getDoctorByUserName($_POST["username"])['password'];
+        $password = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['password'];
         if ($password = $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];
@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     public static function patientLogin()
     {
-        $password = PatientManager::getInstance()->getDoctorByUserName($_POST["username"])['password'];
+        $password = PatientManager::getInstance()->getPatientByUserName($_POST["username"])['password'];
         if ($password = $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];

@@ -9,7 +9,7 @@ class ManagersManager extends Manager
         return $this->db->table('managers')->select()->exec();
     }
 
-    public function getManagaerByUserName(string $username)
+    public function getManagerByUserName(string $username)
     {
         return $this->db->table('managers')->select()->where('username', $username)->fetchAll();
     }

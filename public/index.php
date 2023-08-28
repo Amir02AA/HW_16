@@ -3,16 +3,19 @@ include_once "../vendor/autoload.php";
 session_start();
 $app = new \core\Application();
 
-$app->router->get('/','home');
-$app->router->get('/home','home');
+$app->router->get('/',[\controllers\HomeController::class,'home']);
+$app->router->get('/home',[\controllers\HomeController::class,'home']);
 $app->router->get('/contact',[\controllers\ContactController::class,'contact']);
 $app->router->get('/login',[\controllers\LoginController::class,'loginPage']);
 $app->router->get('/register',[\controllers\RegisterController::class,'register']);
+$app->router->get('/logout',[\controllers\LogoutController::class,'logout']);
 
-$app->router->post('/','home');
-$app->router->post('/home','home');
+$app->router->post('/',[\controllers\HomeController::class,'home']);
+$app->router->post('/home',[\controllers\HomeController::class,'home']);
 $app->router->post('/contact',[\controllers\ContactController::class,'contact']);
 $app->router->post('/login',[\controllers\LoginController::class,'loginPage']);
 $app->router->post('/register',[\controllers\RegisterController::class,'register']);
+$app->router->post('/logout',[\controllers\LogoutController::class,'logout']);
+
 
 $app->run();
