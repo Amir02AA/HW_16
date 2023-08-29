@@ -30,4 +30,9 @@ class SectionManager extends Manager
     {
         $this->db->table('sections')->insert($section)->exec();
     }
+
+    public function updateSection(array $section, mixed $id)
+    {
+        $this->db->table('sections')->update($section)->where('id',$id)->exec();
+    }
 }

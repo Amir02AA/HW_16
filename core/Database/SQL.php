@@ -155,7 +155,7 @@ class SQL implements DatabaseInterface
         if (!$this->pdo->query("show tables like 'sections' ;")->fetchAll()) {
             $this->query = "create table sections
                             (
-                                id int primary key ,
+                                id int primary key auto_increment,
                                 name varchar(50)
                             )";
             $this->exec();
@@ -172,6 +172,7 @@ class SQL implements DatabaseInterface
         }
 
         $this->query = substr($this->query, 0, strlen($this->query) - 2);
+        $this->data = array_merge($this->data, $values);
         return $this;
     }
 }

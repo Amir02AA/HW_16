@@ -19,39 +19,43 @@
     <div class="mb-8">
         <h2 class="text-lg font-semibold mb-4">Sections</h2>
         <ul class="space-y-2">
+            <?php
+            foreach (@$sections as $index => $section) {
+            ?>
             <li class="flex items-center justify-between bg-gray-700 p-4 rounded">
                 <div class="flex items-center space-x-2">
-                    <span class="text-gray-300">ID:</span> Item 1 ID<br>
-                    <span class="text-gray-300">Name:</span> Item 1 Name
+                    <span class="text-gray-300"></span> <?= $section['id']."." ?> <br>
+                    <span class="text-gray-300"></span> <?= $section['name'] ?>
                 </div>
                 <div class="flex space-x-2">
-                    <button class="text-gray-300 hover:text-gray-400 focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"/><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"/></g></svg>
-                    </button>
-                    <button class="text-red-300 hover:text-red-400 focus:outline-none">
+                    <a href="?delete=<?= $section['id'] ?>" class="text-red-300 hover:text-red-400 focus:outline-none">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
-                    </button>
+                    </a>
                 </div>
             </li>
+            <?php } ?>
             <!-- Repeat the above structure for other items -->
         </ul>
     </div>
 
     <div>
         <h2 class="text-lg font-semibold mb-4">Create Section</h2>
-        <form class="space-y-4">
+        <form method="post" class="space-y-4" action="/sections">
             <div>
                 <label for="itemName" class="block text-sm font-medium text-gray-400 mb-1">Section Name:</label>
-                <input type="text" id="itemName" name="itemName" class="mt-1 px-4 py-2 w-full border rounded-md bg-gray-700 text-gray-200">
+                <input type="text" id="itemName" name="sectionName" class="mt-1 px-4 py-2 w-full border rounded-md bg-gray-700 text-gray-200">
             </div>
             <div>
                 <label for="itemID" class="block text-sm font-medium text-gray-400 mb-1">Section ID:</label>
-                <input type="text" id="itemID" name="itemID" class="mt-1 px-4 py-2 w-full border rounded-md bg-gray-700 text-gray-200">
+                <input type="text" id="itemID" name="sectionId" class="mt-1 px-4 py-2 w-full border rounded-md bg-gray-700 text-gray-200">
             </div>
-            <button type="submit" class="bg-indigo-600 text-gray-200 px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none">
-                Create
+            <button type="submit" name="submit" value="add" class="bg-indigo-600 text-gray-200 px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none">
+                Add
+            </button>
+            <button type="submit" name="submit" value="update" class="bg-indigo-600 text-gray-200 px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none">
+                Update
             </button>
         </form>
     </div>

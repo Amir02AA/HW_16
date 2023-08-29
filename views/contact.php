@@ -1,7 +1,7 @@
 <?php
 ?>
 <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
-    <h1 class="text-2xl font-semibold mb-4">Contact Us</h1>
+    <h1 class=" text-gray-600 text-2xl font-semibold mb-4">Contact Us</h1>
     <p class="text-gray-600 mb-4">Feel free to reach out to us for any inquiries or feedback.</p>
 
     <form action="" method="post">
