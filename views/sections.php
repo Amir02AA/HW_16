@@ -24,7 +24,7 @@
             ?>
             <li class="flex items-center justify-between bg-gray-700 p-4 rounded">
                 <div class="flex items-center space-x-2">
-                    <span class="text-gray-300"></span> <?= $section['id']."." ?> <br>
+                    <span class="text-gray-300"></span> <?= ($index+1)."." ?> <br>
                     <span class="text-gray-300"></span> <?= $section['name'] ?>
                 </div>
                 <div class="flex space-x-2">
@@ -36,7 +36,6 @@
                 </div>
             </li>
             <?php } ?>
-            <!-- Repeat the above structure for other items -->
         </ul>
     </div>
 

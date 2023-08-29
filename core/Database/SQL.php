@@ -100,16 +100,30 @@ class SQL implements DatabaseInterface
 
     public function createTables()
     {
+        if (!$this->pdo->query("show tables like 'sections' ;")->fetchAll()) {
+            $this->query = "create table sections
+                            (
+                                id int primary key auto_increment,
+                                name varchar(50) unique 
+                            )";
+            $this->exec();
+        }
         if (!$this->pdo->query("show tables like 'doctors' ;")->fetchAll()) {
             $this->query = "create table doctors
                             (
                                 id int primary key auto_increment,
                                 name varchar(50),
-                                section varchar(50),
+                                section_id int,
                                 verified tinyint,
                                 username varchar(50) unique ,
                                 password varchar(20),
-                                email varchar(50)
+                                email varchar(50),
+                                medical_code int unique ,
+                                education varchar(100),
+                                pic varchar(200),
+                                history text,
+                                foreign key (section_id) 
+                                references sections(id)
                             )";
             $this->exec();
         }
@@ -152,14 +166,7 @@ class SQL implements DatabaseInterface
             $this->exec();
         }
 
-        if (!$this->pdo->query("show tables like 'sections' ;")->fetchAll()) {
-            $this->query = "create table sections
-                            (
-                                id int primary key auto_increment,
-                                name varchar(50)
-                            )";
-            $this->exec();
-        }
+
 
 
     }

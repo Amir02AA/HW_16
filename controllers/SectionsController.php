@@ -47,5 +47,4 @@ class SectionsController extends Controller
         ];
         SectionManager::getInstance()->updateSection($section, $id);
     }
-
 }

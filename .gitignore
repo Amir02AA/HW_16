@@ -1,0 +1,5 @@
+src/pics
+vendor
+controllers/test.php
+public/test.php
+views/layouts/test.php

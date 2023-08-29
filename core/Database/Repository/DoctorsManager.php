@@ -47,4 +47,9 @@ class DoctorsManager extends Manager
         return $this->db->table('doctors')->select()->where('verified', 0)->fetchAll();
     }
 
+    public function updateDoctorByUserName(array $doctor , string $username)
+    {
+        $this->db->table('doctors')->update($doctor)->where('username',$username)->exec();
+    }
+
 }
