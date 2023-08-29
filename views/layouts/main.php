@@ -4,6 +4,7 @@ $register_prof = (isset($_SESSION['user'])) ? $_SESSION['user'] : 'Register';
 
 $login_href = "/$login_logout";
 $register_href = (isset($_SESSION['user'])) ? "/profile" : "/register";
+$color = (isset($_SESSION['user'])) ? 'text-gray-800'." font-bold" :'text-white';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +58,7 @@ $register_href = (isset($_SESSION['user'])) ? "/profile" : "/register";
 
         <div class="hidden lg:flex space-x-4">
             <a href="<?= $login_href ?>" class="text-white navbar-hover-bg p-2 rounded-lg"><?= $login_logout ?></a>
-            <a href="<?= $register_href ?>" class="text-white navbar-hover-bg p-2 rounded-lg"><?= $register_prof ?></a>
+            <a href="<?= $register_href ?>" class="<?= $color?> navbar-hover-bg p-2 rounded-lg"><?= $register_prof ?></a>
         </div>
     </div>
 </nav>

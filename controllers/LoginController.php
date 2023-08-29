@@ -35,7 +35,7 @@ class LoginController extends Controller
     public static function managerLogin()
     {
         $password = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['password'] ?? '';
-        $verified = DoctorsManager::getInstance()->getManagerByUserName($_POST["username"])['verified'];
+        $verified = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['verified'];
 
         if ($password == $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];

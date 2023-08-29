@@ -25,28 +25,35 @@ $users ??= [];
     <div class="flex space-x-4">
         <div class="w-1/2">
             <h2 class="text-lg font-semibold mb-2">Doctors</h2>
-            <?php
-            foreach (@$users['doctors'] as $index => $doctor) {
-                $color = ($doctor['verified'])? "text-gray-200" : "text-red-800";
-            ?>
-            <button type="button"
-                    class="bg-purple-400 <?= $color ?> px-4 py-2 font-bold rounded hover:bg-indigo-700 focus:outline-none w-full mb-2">
-                <?= $doctor['username'] ?>
-            </button>
-           <?php } ?>
+            <form method="post">
+
+
+                <?php
+                foreach (@$users['doctors'] as $index => $doctor) {
+                    $color = ($doctor['verified']) ? "text-gray-200" : "text-red-800";
+                    ?>
+                    <button type="submit" name="doctor" value="<?= $doctor['id'] ?>"
+                            class="bg-purple-400 <?= $color ?> px-4 py-2 font-bold rounded hover:bg-indigo-700 focus:outline-none w-full mb-2">
+                        <?= $doctor['username'] ?>
+                    </button>
+                <?php } ?>
         </div>
+
         <div class="w-1/2">
             <h2 class="text-lg font-semibold mb-2">Managers</h2>
             <?php
             foreach (@$users['managers'] as $index => $manager) {
-            $color = ($manager['verified'])? "text-gray-200" : "text-red-800";
-            ?>
-            <button type="button"
-                    class="bg-green-600 <?= $color ?> px-4 py-2 font-bold rounded hover:bg-blue-700 focus:outline-none w-full mb-2">
-                <?= $manager['username'] ?>
-            </button>
-            <?php } ?>
+                if ($_SESSION['user'] != $manager['username']){
+                $color = ($manager['verified']) ? "text-gray-200" : "text-red-800";
+                ?>
+                <button type="submit" name="manager" value="<?= $manager['id'] ?>"
+                        class="bg-green-600 <?= $color ?> px-4 py-2 font-bold rounded hover:bg-blue-700 focus:outline-none w-full mb-2">
+                    <?= $manager['username'] ?>
+                </button>
+            <?php }
+            } ?>
         </div>
+            </form>
     </div>
 </div>
 </body>

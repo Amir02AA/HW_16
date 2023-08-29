@@ -12,6 +12,10 @@ class VerifyController extends Controller
     public static function verify()
     {
         self::getUsers();
+
+        if (isset($_POST['doctor'])) DoctorsManager::getInstance()->verifyDoctorToggle($_POST['doctor']);
+        if (isset($_POST['manager'])) ManagersManager::getInstance()->verifyManagerToggle($_POST['manager']);
+
         return Render::renderURI('verify', 'auth', ['users' => self::getUsers()]);
     }
 

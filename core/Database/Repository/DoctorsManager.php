@@ -23,7 +23,7 @@ class DoctorsManager extends Manager
 
     public function getDoctorById(int $id)
     {
-        return $this->db->table('doctors')->select()->where('id', $id)->fetchAll();
+        return $this->db->table('doctors')->select()->where('id', $id)->fetchAll()[0];
     }
 
     public function getDoctorByUserName(string $username)
@@ -36,9 +36,10 @@ class DoctorsManager extends Manager
         $this->db->table('doctors')->insert($doctor)->exec();
     }
 
-    public function verifyDoctor(int $id)
+    public function verifyDoctorToggle(int $id)
     {
-        $this->db->table('doctors')->update(['verified' => 1])->where('id', $id)->exec();
+        $verified = $this->getDoctorById($id)['verified'];
+        $this->db->table('doctors')->update(['verified' => (int)!$verified])->where('id', $id)->exec();
     }
 
     public function getUnverifiedDoctors()

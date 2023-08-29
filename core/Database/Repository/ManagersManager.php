@@ -15,6 +15,7 @@ class ManagersManager extends Manager
         else static::$instance = new static($db);
         return static::$instance;
     }
+
     public function getManagers()
     {
         return $this->db->table('managers')->select()->fetchAll();
@@ -33,13 +34,19 @@ class ManagersManager extends Manager
         $this->db->table('managers')->insert($manager)->exec();
     }
 
-    public function verifyManager(int $id)
+    public function verifyManagerToggle(int $id)
     {
-        $this->db->table('managers')->update(['verified' => 1])->where('id', $id)->exec();
+        $verified = $this->getManagerById($id)['verified'];
+        $this->db->table('managers')->update(['verified' => (int)!$verified])->where('id', $id)->exec();
     }
 
     public function getUnverifiedManagers()
     {
-        return $this->db->table('managers')->select()->where('verified',0)->fetchAll();
+        return $this->db->table('managers')->select()->where('verified', 0)->fetchAll();
+    }
+
+    private function getManagerById(int $id)
+    {
+        return $this->db->table('managers')->select()->where('id', $id)->fetchAll()[0];
     }
 }
