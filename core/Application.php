@@ -5,7 +5,7 @@ namespace core;
 class Application
 {
     public Router $router;
-    private string $currentController;
+    private Controller $currentController;
     private static ?self $instance = null;
 
     private function __construct()
@@ -15,32 +15,34 @@ class Application
 
     public static function getInstance(): self
     {
-        return (self::$instance) ? : self::$instance = new self();
+        return (self::$instance) ?: self::$instance = new self();
     }
 
 
-    public static function isGuest()
+    public static function getRole()
     {
-        return !isset($_SESSION['user']);
+
+        return (isset($_SESSION['user'])) ?: 'guest';
     }
 
     public function run()
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $exception) {
+            echo Render::errorRender($exception->getMessage(), $exception->getCode());
+        }
     }
 
     /**
-     * @param string $currentController
+     * @param Controller $currentController
      */
-    public function setCurrentController(string $currentController): void
+    public function setCurrentController(Controller $currentController): void
     {
         $this->currentController = $currentController;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrentController(): string
+    public function getCurrentController()
     {
         return $this->currentController;
     }

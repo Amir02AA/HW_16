@@ -3,7 +3,6 @@
 namespace core\MiddleWares;
 
 
-
 use core\Application;
 
 class AuthMiddle extends BaseMiddle
@@ -17,9 +16,9 @@ class AuthMiddle extends BaseMiddle
 
     public function execute()
     {
-        if (Application::isGuest()) {
-            if (empty($this->actions) || in_array(Application::getInstance()->getCurrentController()::getAction(), $this->actions)) {
-               echo "MiddleWare Error";
+        if (Application::getRole() == 'guest') {
+            if (empty($this->actions) || in_array(Application::getInstance()->getCurrentController()->getAction(), $this->actions)) {
+                throw new \Exception("Wrong permission", code: 403);
             }
         }
     }

@@ -10,10 +10,10 @@ abstract class Controller
     /**
      * @param string $action
      */
-    abstract public static function setAction(string $action);
+    abstract public function setAction(string $action);
 
     /**
      * @return string
      */
-    abstract public static function getAction();
+    abstract public function getAction();
 }

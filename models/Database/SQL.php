@@ -6,7 +6,7 @@ use PDO;
 
 class SQL implements DatabaseInterface
 {
-    private array $data=[];
+    private array $data = [];
     private string $query;
     private PDO $pdo;
     private string $table;
@@ -15,14 +15,15 @@ class SQL implements DatabaseInterface
 
     private function __construct()
     {
-        $dsn =ENVmanager::getSQLconfig()['dsn'];
-        $user = ENVmanager::getSQLconfig()['user'];
-        $password = ENVmanager::getSQLconfig()['password'];
+        $config = ENVmanager::getSQLconfig();
+        $dsn = $config['dsn'];
+        $user = $config['user'];
+        $password = $config['password'];
 
-        $this->pdo = new PDO($dsn, $user,$password);
+        $this->pdo = new PDO($dsn, $user, $password);
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $this->createDatabase();
-        $this->pdo->query("use ".$this->db)->execute();
+        $this->pdo->query("use " . $this->db)->execute();
         $this->createTables();
     }
 
@@ -67,17 +68,11 @@ class SQL implements DatabaseInterface
 
     public function exec(): bool
     {
-//        echo "<pre>";
-//        print_r($this->data);
-//        echo "<pre>";
         return $this->pdo->prepare($this->query . ";")->execute($this->data);
     }
 
     public function fetchAll(): array|string
     {
-//        echo "<pre>";
-//        print_r($this->data);
-//        echo "<pre>";
         $stmnt = $this->pdo->prepare($this->query . ";");
         $stmnt->execute($this->data);
 
@@ -168,8 +163,6 @@ class SQL implements DatabaseInterface
                             )";
             $this->exec();
         }
-
-
 
 
     }

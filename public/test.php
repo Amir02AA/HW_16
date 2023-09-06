@@ -1,14 +1,10 @@
 <?php
-
-use core\Application;
-
 include_once "../vendor/autoload.php";
 
-$callback = [\controllers\HomeController::class , 'home'];
+use core\Application;
+use models\Database\Repository\DoctorsManager;
+use models\Database\Repository\ManagersManager;
+use models\Database\Repository\PatientManager;
 
-$callback[0]::setAction($callback[1]);
-$middlewares = $callback[0]::getMiddlewares();
-Application::getInstance()->setCurrentController($callback[0]);
-foreach ($middlewares as $index => $middleware) {
-    $middleware->execute();
-}
+//$obj = ("Doctors"."Manager")::getInstance();
+

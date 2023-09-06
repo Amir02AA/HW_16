@@ -41,12 +41,14 @@ class Router
         if (!$callback) return Render::errorRender("Not Found", 404);
         if (is_string($callback)) return Render::renderURI($callback);
         if (is_array($callback)) {
-            $callback[0]::setAction($callback[1]);
-            $middlewares = $callback[0]::getMiddlewares();
-            Application::getInstance()->setCurrentController($callback[0]);
+            $controller = $callback[0]::getInstance();
+            $controller->setAction($callback[1]);
+            $middlewares = $controller->getMiddlewares();
+            Application::getInstance()->setCurrentController($controller);
             foreach ($middlewares as $index => $middleware) {
                 $middleware->execute();
             }
+            $callback[0] = $controller;
             return call_user_func($callback);
         }
     }

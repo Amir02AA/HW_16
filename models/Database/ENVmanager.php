@@ -6,7 +6,7 @@ use Dotenv\Dotenv;
 
 class ENVmanager
 {
-    private static string $dir = '../../';
+    private static string $dir = '../';
     private static array $envs = [];
 
     public static function setDir(string $dir)
@@ -21,6 +21,7 @@ class ENVmanager
 
     public static function getSQLconfig()
     {
+        self::load();
         $config = [
             'dsn' => self::$envs['DB_DSN'],
             'user' => self::$envs['DB_USER'],

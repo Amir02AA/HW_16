@@ -4,16 +4,10 @@ namespace models;
 
 use core\Model;
 
-class Manager extends Model
+class Manager extends UserBaseModel
 {
-    public function rules()
+    public static function tableName()
     {
-        return [
-            'name' => [self::RULE_REQUIRED],
-            'username' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 4]],
-            'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
-            'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 5]],
-            'passwordConfirm' => [[self::RULE_MATCH, 'match' => 'password']],
-        ];
+        return "managers";
     }
 }

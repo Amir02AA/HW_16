@@ -3,6 +3,7 @@
 namespace controllers;
 
 use core\Controller;
+use core\MiddleWares\AuthMiddle;
 use core\Render;
 use core\Request;
 use models\Database\Repository\DoctorsManager;
@@ -15,7 +16,9 @@ class ProfileController extends Controller
     private static ?self $instance = null;
 
     private function __construct()
-    {}
+    {
+        $this->addMiddleware(new AuthMiddle(['profile']));
+    }
 
     public static function getInstance(): self
     {
