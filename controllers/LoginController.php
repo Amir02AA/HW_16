@@ -3,15 +3,25 @@
 namespace controllers;
 
 use core\Controller;
-use core\Database\Repository\DoctorsManager;
-use core\Database\Repository\ManagersManager;
-use core\Database\Repository\PatientManager;
 use core\Render;
 use core\Request;
+use models\Database\Repository\DoctorsManager;
+use models\Database\Repository\ManagersManager;
+use models\Database\Repository\PatientManager;
 
 class LoginController extends Controller
 {
-    public static function loginPage()
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
+    public function loginPage()
     {
         $_POST = Request::getInstance()->getSanitizedData();
 
@@ -19,7 +29,7 @@ class LoginController extends Controller
         return Render::renderURI('login', 'auth');
     }
 
-    public static function doctorLogin()
+    public function doctorLogin()
     {
 
         $password = DoctorsManager::getInstance()->getDoctorByUserName($_POST["username"])['password'] ?? '';
@@ -32,7 +42,7 @@ class LoginController extends Controller
         }
     }
 
-    public static function managerLogin()
+    public function managerLogin()
     {
         $password = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['password'] ?? '';
         $verified = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['verified'];
@@ -45,7 +55,7 @@ class LoginController extends Controller
         }
     }
 
-    public static function patientLogin()
+    public function patientLogin()
     {
         $password = PatientManager::getInstance()->getPatientByUserName($_POST["username"])['password'] ?? '';
         if ($password == $_POST["password"]) {

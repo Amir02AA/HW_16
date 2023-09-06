@@ -1,7 +1,7 @@
 <?php
 include_once "../vendor/autoload.php";
 session_start();
-$app = new \core\Application();
+$app = \core\Application::getInstance();
 
 $app->router->get('/',[\controllers\HomeController::class,'home']);
 $app->router->get('/home',[\controllers\HomeController::class,'home']);
@@ -24,9 +24,5 @@ $app->router->post('/profile',[\controllers\ProfileController::class,'profile'])
 $app->router->post('/wait',[\controllers\WaitController::class,'wait']);
 $app->router->post('/verify',[\controllers\VerifyController::class,'verify']);
 $app->router->post('/sections',[\controllers\SectionsController::class,'sections']);
-
-
-
-
 
 $app->run();

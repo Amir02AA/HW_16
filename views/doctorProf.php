@@ -1,5 +1,5 @@
 <?php
-$sections = \core\Database\Repository\SectionManager::getInstance()->getSections();
+$sections = \models\Database\Repository\SectionManager::getInstance()->getSections();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -6,5 +6,15 @@ use core\Controller;
 
 class ManagerController extends Controller
 {
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
 
 }

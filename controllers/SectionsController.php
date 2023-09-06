@@ -3,13 +3,24 @@
 namespace controllers;
 
 use core\Controller;
-use core\Database\Repository\SectionManager;
 use core\Render;
 use core\Request;
+use models\Database\Repository\SectionManager;
 
 class SectionsController extends Controller
 {
-    public static function sections()
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
+
+    public function sections()
     {
         if (isset($_GET['delete'])) {
             $_GET = Request::getInstance()->getSanitizedData();
@@ -24,13 +35,13 @@ class SectionsController extends Controller
             ['sections' => SectionManager::getInstance()->getSections()]);
     }
 
-    public static function delete()
+    public function delete()
     {
         $id = $_GET['delete'];
         SectionManager::getInstance()->deleteSection($id);
     }
 
-    public static function add()
+    public function add()
     {
         $section = [
             'id' => $_POST["sectionId"],
@@ -39,7 +50,7 @@ class SectionsController extends Controller
         SectionManager::getInstance()->addSection($section);
     }
 
-    public static function update()
+    public function update()
     {
         $id = $_POST['sectionId'];
         $section = [

@@ -6,8 +6,20 @@ use core\Controller;
 use core\Render;
 
 class ContactController extends Controller
+
 {
-    public static function contact()
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
+
+    public function contact()
     {
         return Render::renderURI('contact');
     }

@@ -3,13 +3,23 @@
 namespace controllers;
 
 use core\Controller;
-use core\Database\Repository\DoctorsManager;
-use core\Database\Repository\ManagersManager;
 use core\Render;
+use models\Database\Repository\DoctorsManager;
+use models\Database\Repository\ManagersManager;
 
 class VerifyController extends Controller
 {
-    public static function verify()
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
+    public function verify()
     {
         self::getUsers();
 
@@ -19,7 +29,7 @@ class VerifyController extends Controller
         return Render::renderURI('verify', 'auth', ['users' => self::getUsers()]);
     }
 
-    public static function getUsers()
+    public function getUsers()
     {
         $users = [
             'doctors' => DoctorsManager::getInstance()->getDoctors(),

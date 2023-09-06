@@ -1,6 +1,6 @@
 <?php
 
-namespace core\Database;
+namespace models\Database;
 
 interface DatabaseInterface
 {

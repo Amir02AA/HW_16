@@ -3,15 +3,26 @@
 namespace controllers;
 
 use core\Controller;
-use core\Database\Repository\DoctorsManager;
-use core\Database\Repository\ManagersManager;
-use core\Database\Repository\PatientManager;
 use core\Render;
 use core\Request;
+use models\Database\Repository\DoctorsManager;
+use models\Database\Repository\ManagersManager;
+use models\Database\Repository\PatientManager;
 
 class ProfileController extends Controller
 {
-    public static function profile()
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
+
+    public function profile()
     {
         if (isset($_POST['submit'])) {
             $_POST = Request::getInstance()->getSanitizedData();
@@ -31,7 +42,7 @@ class ProfileController extends Controller
 
     }
 
-    public static function getData()
+    public function getData()
     {
         $data = match ($_SESSION['role']) {
             'doctor' => DoctorsManager::getInstance()->getDoctorByUserName($_SESSION['user']),
@@ -43,7 +54,7 @@ class ProfileController extends Controller
         return ['user' => $data];
     }
 
-    public static function saveChanges()
+    public function saveChanges()
     {
         $pic = self::savePic();
         $data = [];
@@ -59,7 +70,7 @@ class ProfileController extends Controller
         };
     }
 
-    public static function savePic()
+    public function savePic()
     {
         if (@$_FILES['pic']['name'] != '') {
             $pic = "../src/pics/" . $_FILES['pic']['name'];

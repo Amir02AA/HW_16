@@ -1,6 +1,6 @@
 <?php
 
-namespace core\Database;
+namespace models\Database;
 
 use PDO;
 
@@ -15,8 +15,11 @@ class SQL implements DatabaseInterface
 
     private function __construct()
     {
-        $dsn = "mysql:host=localhost;";
-        $this->pdo = new PDO($dsn, 'root');
+        $dsn =ENVmanager::getSQLconfig()['dsn'];
+        $user = ENVmanager::getSQLconfig()['user'];
+        $password = ENVmanager::getSQLconfig()['password'];
+
+        $this->pdo = new PDO($dsn, $user,$password);
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $this->createDatabase();
         $this->pdo->query("use ".$this->db)->execute();

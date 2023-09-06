@@ -3,21 +3,32 @@
 namespace controllers;
 
 use core\Controller;
-use core\Database\Repository\DoctorsManager;
-use core\Database\Repository\ManagersManager;
-use core\Database\Repository\PatientManager;
 use core\Render;
 use core\Request;
+use models\Database\Repository\DoctorsManager;
+use models\Database\Repository\ManagersManager;
+use models\Database\Repository\PatientManager;
 
 class RegisterController extends Controller
 {
-    public static function register()
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
+
+    public function register()
     {
         if (isset($_POST['submit'])) self::addAccount();
         return Render::renderURI('register','auth');
     }
 
-    public static function addAccount()
+    public function addAccount()
     {
         $_POST = Request::getInstance()->getSanitizedData();
         $user = [

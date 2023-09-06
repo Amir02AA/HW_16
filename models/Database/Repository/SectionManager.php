@@ -1,9 +1,9 @@
 <?php
 
-namespace core\Database\Repository;
+namespace models\Database\Repository;
 
-use core\Database\DatabaseInterface;
-use core\Database\SQL;
+use models\Database\DatabaseInterface;
+use models\Database\SQL;
 
 class SectionManager extends Manager
 {

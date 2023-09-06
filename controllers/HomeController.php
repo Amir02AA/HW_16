@@ -7,7 +7,18 @@ use core\Render;
 
 class HomeController extends Controller
 {
-    public static function home()
+    use MiddlewareForControllers;
+    private static ?self $instance = null;
+
+    private function __construct()
+    {}
+
+    public static function getInstance(): self
+    {
+        return (self::$instance) ? : self::$instance = new self();
+    }
+
+    public function home()
     {
         return Render::renderURI('home');
     }

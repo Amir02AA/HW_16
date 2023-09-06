@@ -1,11 +1,14 @@
 <?php
-include_once "../vendor/autoload.php";
-//session_start();
-//$app = new \core\Application();
-//$_SESSION['user'] = 'Amir';
-//$_SESSION['role'] = 'doctor';
-//echo \controllers\ProfileController::profile();
 
-echo "<pre>";
-print_r(\core\Database\Repository\ManagersManager::getInstance()->getManagerByUserName('Amir'));
-echo "<pre>";
+use core\Application;
+
+include_once "../vendor/autoload.php";
+
+$callback = [\controllers\HomeController::class , 'home'];
+
+$callback[0]::setAction($callback[1]);
+$middlewares = $callback[0]::getMiddlewares();
+Application::getInstance()->setCurrentController($callback[0]);
+foreach ($middlewares as $index => $middleware) {
+    $middleware->execute();
+}
