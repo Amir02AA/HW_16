@@ -21,8 +21,7 @@ class Application
 
     public static function getRole()
     {
-
-        return (isset($_SESSION['user'])) ?: 'guest';
+        return (isset($_SESSION['user'])) ? $_SESSION['role'] : 'guest';
     }
 
     public function run()

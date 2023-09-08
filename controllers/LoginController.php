@@ -33,8 +33,8 @@ class LoginController extends Controller
     {
 
         $password = DoctorsManager::getInstance()->getDoctorByUserName($_POST["username"])['password'] ?? '';
-        $verified = DoctorsManager::getInstance()->getDoctorByUserName($_POST["username"])['verified'];
-        if ($password == $_POST["password"]) {
+        $verified = DoctorsManager::getInstance()->getDoctorByUserName($_POST["username"])['verified'] ?? 0;
+        if ($password && $password == $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];
             $_SESSION['verified'] = $verified;
@@ -45,9 +45,9 @@ class LoginController extends Controller
     public function managerLogin()
     {
         $password = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['password'] ?? '';
-        $verified = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['verified'];
+        $verified = ManagersManager::getInstance()->getManagerByUserName($_POST["username"])['verified'] ?? 0;
 
-        if ($password == $_POST["password"]) {
+        if ($password && $password == $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];
             $_SESSION['verified'] = $verified;
@@ -58,7 +58,7 @@ class LoginController extends Controller
     public function patientLogin()
     {
         $password = PatientManager::getInstance()->getPatientByUserName($_POST["username"])['password'] ?? '';
-        if ($password == $_POST["password"]) {
+        if ($password && $password == $_POST["password"]) {
             $_SESSION['user'] = $_POST["username"];
             $_SESSION['role'] = $_POST["role"];
             $_SESSION['verified'] = 1;

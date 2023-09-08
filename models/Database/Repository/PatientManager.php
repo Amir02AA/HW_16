@@ -28,7 +28,7 @@ class PatientManager extends Manager
 
     public function getPatientByUserName(string $username)
     {
-        return $this->db->table('patients')->select()->where('username', $username)->fetchAll()[0];
+        return @$this->db->table('patients')->select()->where('username', $username)->fetchAll()[0];
     }
 
     public function deletePatient(int $id)

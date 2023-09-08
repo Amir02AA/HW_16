@@ -23,12 +23,12 @@ class DoctorsManager extends Manager
 
     public function getDoctorById(int $id)
     {
-        return $this->db->table('doctors')->select()->where('id', $id)->fetchAll()[0];
+        return @$this->db->table('doctors')->select()->where('id', $id)->fetchAll()[0];
     }
 
     public function getDoctorByUserName(string $username)
     {
-        return $this->db->table('doctors')->select()->where('username', $username)->fetchAll()[0];
+        return @$this->db->table('doctors')->select()->where('username', $username)->fetchAll()[0];
     }
 
     public function addDoctor(array $doctor)
